@@ -11,7 +11,7 @@ import {
 
 const Dashboard = ({ navigation }) => {
   const pills = [
-   { time: "08:00 AM", name: "Metformin" },
+    { time: "08:00 AM", name: "Metformin" },
     { time: "10:00 AM", name: "Aspirin" },
     { time: "12:00 PM", name: "Nexium" },
     { time: "03:00 PM", name: "Lisinopril" },
@@ -29,6 +29,12 @@ const Dashboard = ({ navigation }) => {
     }
   };
 
+  const [selectedDate, setSelectedDate] = useState("");
+
+  const handleDayPress = (day) => {
+    setSelectedDate(day.dateString);
+  };
+
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.contentContainer}>
@@ -39,15 +45,21 @@ const Dashboard = ({ navigation }) => {
               style={styles.calendar}
               hideExtraDays={true}
               current={"2023-03-28"}
+              onDayPress={handleDayPress}
               markedDates={{
-                "2023-03-28": { selected: true, marked: true },
-                "2023-03-29": { marked: true },
-                "2023-03-30": { marked: true },
-                "2023-03-31": { marked: true },
-                "2023-04-01": { marked: true },
-                "2023-04-02": { marked: true },
-                "2023-04-03": { marked: true },
+                [selectedDate]: { selected: true, marked: true },
               }}
+              theme={{
+                "stylesheet.agenda.main": {
+                  week: {
+                    marginTop: 20,
+                    marginBottom: 20,
+                    flexDirection: "row",
+                    justifyContent: "space-around",
+                  },
+                },
+              }}
+              mode={"agenda"}
             />
           </View>
           <View style={styles.progressBar}>
@@ -61,7 +73,7 @@ const Dashboard = ({ navigation }) => {
           </View>
         </View>
         <View style={styles.pillsSection}>
-          <Text style={styles.sectionTitle}>Pills for Today</Text>
+          <Text style={styles.sectionTitle}>Pills for {selectedDate}</Text>
           {pills.map((pill, index) => (
             <View style={styles.pillListing} key={index}>
               <Text
@@ -76,10 +88,7 @@ const Dashboard = ({ navigation }) => {
               >
                 {pill.name}
               </Text>
-              <CheckBox
-                value={checkedPills.includes(pill.name)}
-                onValueChange={() => handleCheck(pill.name)}
-              />
+              
             </View>
           ))}
         </View>
