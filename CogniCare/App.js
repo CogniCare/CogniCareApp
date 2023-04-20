@@ -9,6 +9,7 @@ import DashboardScreen from "./Dashboard";
 import ScheduleScreen from "./Schedule";
 import ProfileScreen from "./Profile";
 import PrescriptionScreen from "./prescription";
+
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -39,11 +40,48 @@ function ProfileStack() {
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="Onboarding" component={OnboardingScreen} />
-        <Stack.Screen name="Dashboard" component={DashboardScreen} />
-      </Stack.Navigator>
+      <Tab.Navigator
+        tabBarOptions={{
+          activeTintColor: "#33CC66",
+          inactiveTintColor: "gray",
+        }}
+      >
+        <Tab.Screen
+          name="Dashboard"
+          component={DashboardStack}
+          options={{
+            tabBarLabel: "Dashboard",
+            tabBarIcon: ({ color, size }) => (
+              <Icon
+                name="dashboard"
+                type="material"
+                color={color}
+                size={size}
+              />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Schedule"
+          component={ScheduleStack}
+          options={{
+            tabBarLabel: "Schedule",
+            tabBarIcon: ({ color, size }) => (
+              <Icon name="calendar" type="material" color={color} size={size} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Profile"
+          component={ProfileStack}
+          options={{
+            tabBarLabel: "Profile",
+            tabBarIcon: ({ color, size }) => (
+              <Icon name="person" type="material" color={color} size={size} />
+            ),
+          }}
+        />
+      </Tab.Navigator>
     </NavigationContainer>
   );
 }
