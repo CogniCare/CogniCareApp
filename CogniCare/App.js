@@ -9,6 +9,7 @@ import DashboardScreen from "./Dashboard";
 import ScheduleScreen from "./Schedule";
 import ProfileScreen from "./Profile";
 import PrescriptionScreen from "./prescription";
+
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -44,6 +45,7 @@ function App() {
         <Stack.Screen name="Onboarding" component={OnboardingScreen} />
         <Stack.Screen name="Dashboard" component={DashboardScreen} />
         <Stack.Screen name="prescription" component={PrescriptionScreen} />
+
       </Stack.Navigator>
     </NavigationContainer>
   );
