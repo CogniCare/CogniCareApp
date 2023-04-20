@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Calendar } from "react-native-calendars";
 import {
   View,
@@ -18,6 +18,16 @@ const Dashboard = ({ navigation }) => {
     { time: "06:00 PM", name: "Prozac" },
     { time: "08:00 PM", name: "Atorvastatin" },
   ];
+
+  const [checkedPills, setCheckedPills] = useState([]);
+
+  const handleCheck = (pillName) => {
+    if (checkedPills.includes(pillName)) {
+      setCheckedPills(checkedPills.filter((name) => name !== pillName));
+    } else {
+      setCheckedPills([...checkedPills, pillName]);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -41,16 +51,35 @@ const Dashboard = ({ navigation }) => {
             />
           </View>
           <View style={styles.progressBar}>
-            {/* Progress bar display here */}
+            <View
+              style={{
+                height: 20,
+                width: `${(checkedPills.length / (pills.length * 7)) * 100}%`,
+                backgroundColor: "#33CC66",
+              }}
+            />
           </View>
         </View>
         <View style={styles.pillsSection}>
           <Text style={styles.sectionTitle}>Pills for Today</Text>
           {pills.map((pill, index) => (
             <View style={styles.pillListing} key={index}>
-              <Text style={styles.pillTime}>{pill.time}</Text>
-              <Text style={styles.pillName}>{pill.name}</Text>
-              {/*<CheckBox />*/}
+              <Text
+                style={[
+                  styles.pillName,
+                  {
+                    textDecorationLine: checkedPills.includes(pill.name)
+                      ? "line-through"
+                      : "none",
+                  },
+                ]}
+              >
+                {pill.name}
+              </Text>
+              <CheckBox
+                value={checkedPills.includes(pill.name)}
+                onValueChange={() => handleCheck(pill.name)}
+              />
             </View>
           ))}
         </View>
@@ -79,33 +108,43 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   weekCalendar: {
-    height: 120,
-    borderWidth: 1,
-    borderColor: "#DDDDDD",
+    marginTop: 10,
+    height: 350,
+    borderRadius: 10,
+    overflow: "hidden",
+  },
+  calendar: {
+    borderTopWidth: 1,
+    paddingTop: 5,
+    borderBottomWidth: 1,
+    borderColor: "#eee",
+    height: 250,
   },
   progressBar: {
-    height: 10,
     marginTop: 10,
-    backgroundColor: "#DDDDDD",
+    height: 20,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: "#ccc",
+    overflow: "hidden",
   },
   pillsSection: {
-    marginTop: 20,
+    marginTop: 30,
   },
   pillListing: {
     flexDirection: "row",
     alignItems: "center",
-    paddingVertical: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: "#DDDDDD",
+    marginBottom: 10,
   },
   pillTime: {
     flex: 1,
     fontSize: 16,
     fontWeight: "bold",
+    marginRight: 10,
   },
   pillName: {
-    flex: 4,
-    fontSize: 16,
     marginLeft: 10,
+    fontSize: 16,
+    flex: 1,
   },
 });
