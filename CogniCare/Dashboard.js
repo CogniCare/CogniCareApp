@@ -11,7 +11,7 @@ import {
 
 const Dashboard = ({ navigation }) => {
   const pills = [
-    { time: "08:00 AM", name: "Metformin" },
+   { time: "08:00 AM", name: "Metformin" },
     { time: "10:00 AM", name: "Aspirin" },
     { time: "12:00 PM", name: "Nexium" },
     { time: "03:00 PM", name: "Lisinopril" },

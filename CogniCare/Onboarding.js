@@ -1,5 +1,11 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, Button, StyleSheet } from "react-native";
+import { getDatabase, ref, set } from "firebase/database";
+import {auth} from "./Firebase/firebase";
+
+
+const user = auth.currentUser;
+
 
 const Onboarding = ({ navigation }) => {
   const [fullName, setFullName] = useState("");
@@ -9,9 +15,27 @@ const Onboarding = ({ navigation }) => {
   const [diagnosis, setDiagnosis] = useState("");
   const [prescription, setPrescription] = useState("");
 
+  function writeUserData(userId, name, email, date,num,condiation,drug) {
+    const db = getDatabase();
+    set(ref(db, 'users/' + userId), {
+      fullname: name,
+      email: email,
+      bday: date,
+      phoneNum: num,
+      disease: condiation,
+      drugs : drug
+    });
+  }
+
+
   const handleOnboarding = () => {
     // Handle onboarding logic here
-    navigation.navigate("MedicationPlan");
+    navigation.navigate("prescription");
+   
+    writeUserData(
+      'JTyCd6CsrERVsTNnR3ekIyicgKA2',fullName,email,dob,phoneNumber,diagnosis,prescription)
+    console.log('compleated Onboarding:');
+
   };
 
   return (
@@ -53,7 +77,7 @@ const Onboarding = ({ navigation }) => {
         value={prescription}
         onChangeText={setPrescription}
       />
-      <Button title="Complete Onboarding" onPress={handleOnboarding} />
+      <Button title= "Complete Onboarding" onPress={handleOnboarding} />
     </View>
   );
 };
