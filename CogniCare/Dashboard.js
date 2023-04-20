@@ -11,7 +11,7 @@ import {
 
 const Dashboard = ({ navigation }) => {
   const pills = [
-    { time: "08:00 AM", name: "Metformin" },
+   { time: "08:00 AM", name: "Metformin" },
     { time: "10:00 AM", name: "Aspirin" },
     { time: "12:00 PM", name: "Nexium" },
     { time: "03:00 PM", name: "Lisinopril" },
@@ -50,7 +50,7 @@ const Dashboard = ({ navigation }) => {
             <View style={styles.pillListing} key={index}>
               <Text style={styles.pillTime}>{pill.time}</Text>
               <Text style={styles.pillName}>{pill.name}</Text>
-              <CheckBox />
+              {/*<CheckBox />*/}
             </View>
           ))}
         </View>
