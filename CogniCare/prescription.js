@@ -79,7 +79,7 @@ const prescription = ({ navigation }) => {
   const handlePrescription = () => {
     // Handle onboarding logic here
     navigation.navigate("Dashboard");
-    writeprescription('JTyCd6CsrERVsTNnR3ekIyicgKA2',drugs)
+    writeprescription(auth.currentUser.uid,drugs)
     console.log(drugs);
    
   };

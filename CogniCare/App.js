@@ -9,46 +9,89 @@ import DashboardScreen from "./Dashboard";
 import ScheduleScreen from "./Schedule";
 import ProfileScreen from "./Profile";
 import PrescriptionScreen from "./prescription";
+import { useState } from "react";
+import { useEffect } from "react";
+import Dashboard from "./Dashboard";
+
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-function DashboardStack() {
+function LoginStack() {
   return (
     <Stack.Navigator>
+      <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen name="Onboarding" component={OnboardingScreen} />
+      <Stack.Screen name="prescription" component={PrescriptionScreen} />
       <Stack.Screen name="Dashboard" component={DashboardScreen} />
     </Stack.Navigator>
   );
 }
 
-function ScheduleStack() {
+
+function DashboardTabs() {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="Schedule" component={ScheduleScreen} />
-    </Stack.Navigator>
+    <Tab.Navigator
+      initialRouteName="Dashboard"
+      tabBarOptions={{
+        activeTintColor: "#e91e63",
+      }}
+    >
+      <Tab.Screen
+        name="Dashboard"
+        component={DashboardScreen}
+        options={{
+          tabBarLabel: "Dashboard",
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="dashboard" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Schedule"
+        component={ScheduleScreen}
+        options={{
+          tabBarLabel: "Schedule",
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="schedule" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{
+          tabBarLabel: "Profile",
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="person" color={color} size={size} />
+          ),
+        }}
+      />
+    </Tab.Navigator>
   );
 }
-
-function ProfileStack() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Profile" component={ProfileScreen} />
-    </Stack.Navigator>
-  );
-}
-
 function App() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="Onboarding" component={OnboardingScreen} />
-        <Stack.Screen name="Dashboard" component={DashboardScreen} />
-        <Stack.Screen name="prescription" component={PrescriptionScreen} />
+  const [authenticated, setAuthenticated] = useState(false);
 
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+  useEffect(() => {
+    // check user authentication status here
+    // setAuthenticated(true/false) accordingly
+  }, []);
+
+  if (authenticated) {
+    return (
+      <NavigationContainer>
+        <DashboardTabs />
+      </NavigationContainer>
+    );
+  } else {
+    return (
+      <NavigationContainer>
+        <LoginStack />
+      </NavigationContainer>
+    );
+  }
 }
 
 export default App;
+

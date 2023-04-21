@@ -13,9 +13,8 @@ const Onboarding = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [diagnosis, setDiagnosis] = useState("");
-  const [prescription, setPrescription] = useState("");
 
-  function writeUserData(userId, name, email, date,num,condiation,drug) {
+  function writeUserData(userId, name, email, date,num,condiation) {
     const db = getDatabase();
     set(ref(db, 'users/' + userId), {
       fullname: name,
@@ -23,7 +22,6 @@ const Onboarding = ({ navigation }) => {
       bday: date,
       phoneNum: num,
       disease: condiation,
-      drugs : drug
     });
   }
 
@@ -33,7 +31,7 @@ const Onboarding = ({ navigation }) => {
     navigation.navigate("prescription");
    
     writeUserData(
-      'JTyCd6CsrERVsTNnR3ekIyicgKA2',fullName,email,dob,phoneNumber,diagnosis,prescription)
+      '4CYYwVo2rZdDdYHYC66gMrnBQmI2',fullName,email,dob,phoneNumber,diagnosis)
     console.log('compleated Onboarding:');
 
   };
@@ -71,13 +69,8 @@ const Onboarding = ({ navigation }) => {
         value={diagnosis}
         onChangeText={setDiagnosis}
       />
-      <TextInput
-        style={styles.input}
-        placeholder="Prescription"
-        value={prescription}
-        onChangeText={setPrescription}
-      />
-      <Button title= "Complete Onboarding" onPress={handleOnboarding} />
+      
+      <Button title= "Input Prescription" onPress={handleOnboarding} />
     </View>
   );
 };
