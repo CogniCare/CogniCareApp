@@ -11,6 +11,8 @@ import { CheckBox } from 'react-native-elements';
 import {auth} from "./Firebase/firebase";
 import { onValue } from "firebase/database";
 import { useEffect } from "react";
+import Icon from "react-native-vector-icons/FontAwesome";
+
 
 
 import { getDatabase, ref, child, get } from "firebase/database";
@@ -109,35 +111,23 @@ const Dashboard = ({ navigation }) => {
           <Text style={styles.sectionTitle}>Pills for {selectedDate}</Text>
           {pills.map((pill, index) => (
             <View style={styles.pillListing} key={index}>
-            
-            {/*
-            
-          <Checkbox
-                value={checkedPills.includes(pill.name)}
-                onValueChange={() => handleCheck(pill.name)}
-              />   
-          
-          
-          */} 
-              <Text
-                style={[
-                  styles.pillName,
-                  {
-                    textDecorationLine: checkedPills.includes(pill.name)
-                      ? "line-through"
-                      : "none",
-                  },
-                ]}
+              <TouchableOpacity
+                onPress={() => handleCheck(pill.name)}
+                style={{ marginRight: 10 }}
               >
-                {pill.name}
-              </Text>
+                {checkedPills.includes(pill.name) ? (
+                  <Icon name="check-square" size={24} color="#33CC66" />
+                ) : (
+                  <Icon name="square-o" size={24} color="black" />
+                )}
+              </TouchableOpacity>
+              <Text style={styles.pillText}>{pill.name}</Text>
             </View>
           ))}
         </View>
       </ScrollView>
     </View>
-  );
-};
+  )};
 
 export default Dashboard;
 

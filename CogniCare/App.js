@@ -23,7 +23,7 @@ function LoginStack() {
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Onboarding" component={OnboardingScreen} />
       <Stack.Screen name="prescription" component={PrescriptionScreen} />
-      <Stack.Screen name="Dashboard" component={DashboardScreen} />
+      <Stack.Screen name="Dashboard" component={DashboardTabs} />
     </Stack.Navigator>
   );
 }
