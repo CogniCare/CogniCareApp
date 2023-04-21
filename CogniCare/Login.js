@@ -51,7 +51,12 @@ const LoginScreen = () => {
       behavior="padding"
       
     >
-      <Text style={styles.title}>CogniCare</Text>
+      <Text style= {{fontSize: 54,
+      marginBottom: 40,
+    color: '#0782F9',
+    fontWeight: 'bold'}}
+      >CogniCare</Text>
+
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Email"
@@ -95,7 +100,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   inputContainer: {
-    width: '80%'
+    width: '80%',
   },
   input: {
     backgroundColor: 'white',

@@ -6,18 +6,53 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
-  CheckBox,
 } from "react-native";
+import { CheckBox } from 'react-native-elements';
+import {auth} from "./Firebase/firebase";
+import { onValue } from "firebase/database";
+import { useEffect } from "react";
+import Icon from "react-native-vector-icons/FontAwesome";
+
+
+
+import { getDatabase, ref, child, get } from "firebase/database";
+
+function useUserData(userId) {
+  const [userData, setUserData] = useState(null);
+  const db = getDatabase();
+  const userRef = ref(db, 'users/' + userId);
+
+  useEffect(() => {
+    onValue(userRef, (snapshot) => {
+      const data = snapshot.val();
+      setUserData(data);
+    });
+  }, [userId]);
+
+  return userData;
+}
 
 const Dashboard = ({ navigation }) => {
+  const userData = useUserData(auth.currentUser.uid);
+
+  if (userData) {
+    var drug_1 = userData.drugs[0];
+    var drug_2 = userData.drugs[1];
+    var drug_3 = userData.drugs[2];
+    var drug_4 = userData.drugs[3];
+
+  }
+  console.log(drug_1)
+
   const pills = [
-    { time: "08:00 AM", name: "Metformin" },
-    { time: "10:00 AM", name: "Aspirin" },
-    { time: "12:00 PM", name: "Nexium" },
-    { time: "03:00 PM", name: "Lisinopril" },
-    { time: "06:00 PM", name: "Prozac" },
-    { time: "08:00 PM", name: "Atorvastatin" },
+    { time: "08:00 AM", name: drug_1},
+    { time: "10:00 AM", name: drug_2},
+    { time: "12:00 PM", name: drug_3},
+    { time: "03:00 PM", name: drug_4},
   ];
+
+
+  
 
   const [checkedPills, setCheckedPills] = useState([]);
 
@@ -76,31 +111,26 @@ const Dashboard = ({ navigation }) => {
           <Text style={styles.sectionTitle}>Pills for {selectedDate}</Text>
           {pills.map((pill, index) => (
             <View style={styles.pillListing} key={index}>
-              <Text
-                style={[
-                  styles.pillName,
-                  {
-                    textDecorationLine: checkedPills.includes(pill.name)
-                      ? "line-through"
-                      : "none",
-                  },
-                ]}
+              <TouchableOpacity
+                onPress={() => handleCheck(pill.name)}
+                style={{ marginRight: 10 }}
               >
-                {pill.name}
-              </Text>
-              <CheckBox
-                value={checkedPills.includes(pill.name)}
-                onValueChange={() => handleCheck(pill.name)}
-              />
+                {checkedPills.includes(pill.name) ? (
+                  <Icon name="check-square" size={24} color="#33CC66" />
+                ) : (
+                  <Icon name="square-o" size={24} color="black" />
+                )}
+              </TouchableOpacity>
+              <Text style={styles.pillText}>{pill.name}</Text>
             </View>
           ))}
         </View>
       </ScrollView>
     </View>
-  );
-};
+  )};
 
 export default Dashboard;
+
 
 const styles = StyleSheet.create({
   container: {
