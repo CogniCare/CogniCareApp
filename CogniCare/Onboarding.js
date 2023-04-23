@@ -12,6 +12,7 @@ const Onboarding = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [diagnosis, setDiagnosis] = useState("");
+  
 
   function writeUserData(userId, name, email, date, num, condiation) {
     const db = getDatabase();
@@ -26,7 +27,7 @@ const Onboarding = ({ navigation }) => {
 
   const handleOnboarding = () => {
     // Handle onboarding logic here
-    navigation.navigate("prescription");
+    navigation.navigate("Prescription");
    
     writeUserData(
       '4CYYwVo2rZdDdYHYC66gMrnBQmI2',fullName,email,dob,phoneNumber,diagnosis)
@@ -72,12 +73,6 @@ const Onboarding = ({ navigation }) => {
         placeholder="Diagnosis"
         value={diagnosis}
         onChangeText={setDiagnosis}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Prescription"
-        value={prescription}
-        onChangeText={setPrescription}
       />
       <Button title="Input Prescription" onPress={handleOnboarding} />
     </View>
