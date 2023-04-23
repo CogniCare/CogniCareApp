@@ -29,18 +29,14 @@ export default function Prescription({ navigation }) {
 
   const handleSavePrescription = () => {
     // Do something with the prescription data here, e.g. save it to a database
-    console.log(drugs);
-    console.log(drugs[0]);
-    console.log(drugs[1]);
-    console.log(drugs[1].name);
+    //console.log(drugs);
+    //console.log(drugs[0]);
+    //console.log(drugs[1]);
+    //console.log(drugs[1].name);
     console.log(drugs.length);
-
-
     console.log('Prescription saved!');
     navigation.navigate("Dashboard");
-
-    writePrescription('JTyCd6CsrERVsTNnR3ekIyicgKA2',drugs,drugs,drugs)
-
+    writePrescription('JTyCd6CsrERVsTNnR3ekIyicgKA2',drugs,drugs,drugs);
   };
 
   function writePrescription(userId, drug_name,dosage,instructions) {
