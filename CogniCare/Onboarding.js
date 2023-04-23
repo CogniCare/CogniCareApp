@@ -1,22 +1,21 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, Button, StyleSheet } from "react-native";
 import { getDatabase, ref, set } from "firebase/database";
-import {auth} from "./Firebase/firebase";
-
+import { auth } from "./Firebase/firebase";
 
 const user = auth.currentUser;
-
 
 const Onboarding = ({ navigation }) => {
   const [fullName, setFullName] = useState("");
   const [dob, setDob] = useState("");
+  const [gender, setGender] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [diagnosis, setDiagnosis] = useState("");
 
-  function writeUserData(userId, name, email, date,num,condiation) {
+  function writeUserData(userId, name, email, date, num, condiation) {
     const db = getDatabase();
-    set(ref(db, 'users/' + userId), {
+    set(ref(db, "users/" + userId), {
       fullname: name,
       email: email,
       bday: date,
@@ -25,13 +24,12 @@ const Onboarding = ({ navigation }) => {
     });
   }
 
-
   const handleOnboarding = () => {
     // Handle onboarding logic here
-    navigation.navigate("Prescription");
+    navigation.navigate("prescription");
    
     writeUserData(
-      'JTyCd6CsrERVsTNnR3ekIyicgKA2',fullName,email,dob,phoneNumber,diagnosis)
+      '4CYYwVo2rZdDdYHYC66gMrnBQmI2',fullName,email,dob,phoneNumber,diagnosis)
     console.log('compleated Onboarding:');
 
   };
@@ -65,12 +63,23 @@ const Onboarding = ({ navigation }) => {
       />
       <TextInput
         style={styles.input}
+        placeholder="Gender"
+        value={gender}
+        onChangeText={setGender}
+      />
+      <TextInput
+        style={styles.input}
         placeholder="Diagnosis"
         value={diagnosis}
         onChangeText={setDiagnosis}
       />
-      
-      <Button title= "Input Prescription" onPress={handleOnboarding} />
+      <TextInput
+        style={styles.input}
+        placeholder="Prescription"
+        value={prescription}
+        onChangeText={setPrescription}
+      />
+      <Button title="Input Prescription" onPress={handleOnboarding} />
     </View>
   );
 };

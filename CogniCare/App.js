@@ -13,7 +13,6 @@ import { useState } from "react";
 import { useEffect } from "react";
 import Dashboard from "./Dashboard";
 
-
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -27,7 +26,6 @@ function LoginStack() {
     </Stack.Navigator>
   );
 }
-
 
 function DashboardTabs() {
   return (
@@ -94,4 +92,3 @@ function App() {
 }
 
 export default App;
-
