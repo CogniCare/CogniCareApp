@@ -33,13 +33,18 @@ function useUserData(userId) {
 }
 
 const Dashboard = ({ navigation }) => {
-  const userData = useUserData(auth.currentUser.uid);
+  const userData = useUserData('JTyCd6CsrERVsTNnR3ekIyicgKA2');
 
   if (userData) {
-    var drug_1 = userData.drugs[0];
-    var drug_2 = userData.drugs[1];
-    var drug_3 = userData.drugs[2];
-    var drug_4 = userData.drugs[3];
+    //var drug_1 = userData.drugs[0];
+    //var drug_2 = userData.drugs[1];
+    //var drug_3 = userData.drugs[2];
+    //var drug_4 = userData.drugs[3];
+
+    var drug_1 = "drug 1";
+    var drug_2 = "drug 2";
+    var drug_3 = "drug 3";
+    var drug_4 = "drug 4";
 
   }
   console.log(drug_1)

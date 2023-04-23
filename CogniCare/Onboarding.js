@@ -28,10 +28,10 @@ const Onboarding = ({ navigation }) => {
 
   const handleOnboarding = () => {
     // Handle onboarding logic here
-    navigation.navigate("prescription");
+    navigation.navigate("Prescription");
    
     writeUserData(
-      '4CYYwVo2rZdDdYHYC66gMrnBQmI2',fullName,email,dob,phoneNumber,diagnosis)
+      'JTyCd6CsrERVsTNnR3ekIyicgKA2',fullName,email,dob,phoneNumber,diagnosis)
     console.log('compleated Onboarding:');
 
   };

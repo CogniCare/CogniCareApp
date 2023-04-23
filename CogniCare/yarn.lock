@@ -7193,6 +7193,11 @@ nanomatch@^1.2.9:
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
 
+native-forms@^1.7.5:
+  version "1.7.5"
+  resolved "https://registry.npmjs.org/native-forms/-/native-forms-1.7.5.tgz"
+  integrity sha512-Dv+w5dVY18rvDcgCKdOPEWzgogIwwGkzLkfyowygBLA1iF/a4O2kEgoZODylsp02/6C75IvygPf7QIkoZZViUw==
+
 ncp@~2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/ncp/-/ncp-2.0.0.tgz"

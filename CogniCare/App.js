@@ -8,7 +8,7 @@ import OnboardingScreen from "./Onboarding";
 import DashboardScreen from "./Dashboard";
 import ScheduleScreen from "./Schedule";
 import ProfileScreen from "./Profile";
-import PrescriptionScreen from "./prescription";
+import PrescriptionScreen from "./Prescription";
 import { useState } from "react";
 import { useEffect } from "react";
 import Dashboard from "./Dashboard";
@@ -22,7 +22,7 @@ function LoginStack() {
     <Stack.Navigator>
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Onboarding" component={OnboardingScreen} />
-      <Stack.Screen name="prescription" component={PrescriptionScreen} />
+      <Stack.Screen name="Prescription" component={PrescriptionScreen} />
       <Stack.Screen name="Dashboard" component={DashboardTabs} />
     </Stack.Navigator>
   );
