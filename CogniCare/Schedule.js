@@ -10,6 +10,8 @@ const Schedule = () => {
     async function fetchMedicationPlan() {
       const response = await axios.get("http://localhost:3000/medication-plan");
       setMedicationPlan(response.data.medicationPlan);
+      //console.log("---------------------------------------------------");
+      //console.log(typeof(setMedicationPlan)); 
       setLoading(false);
     }
 
