@@ -3,6 +3,7 @@ import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-nativ
 import { getDatabase, ref, set } from "firebase/database";
 import {auth} from "./Firebase/firebase";
 
+
 export default function Prescription({ navigation }) {
   const [drugs, setDrugs] = useState([]);
   const [name, setName] = useState('');
@@ -28,26 +29,25 @@ export default function Prescription({ navigation }) {
   };
 
   const handleSavePrescription = () => {
-    // Do something with the prescription data here, e.g. save it to a database
-    //console.log(drugs);
-    //console.log(drugs[0]);
-    //console.log(drugs[1]);
-    //console.log(drugs[1].name);
-    console.log(drugs.length);
-    console.log('Prescription saved!');
+    const db = getDatabase();
+    const userId = 'JTyCd6CsrERVsTNnR3ekIyicgKA2'; // Replace with your user ID
+    
+    // Loop through each drug in the array and upload it to Firebase
+    drugs.forEach((drug, index) => {
+      const drugId = `drug${index + 1}`; // Generate a unique ID for the drug
+      const drugRef = ref(db, `users/${userId}/drugs/${drugId}`);
+      
+      set(drugRef, {
+        name: drug.name,
+        prescription: drug.prescription,
+        instructions: drug.instructions
+      });
+    });
+    
+    console.log("Prescription uploaded");
     navigation.navigate("Dashboard");
-    writePrescription('JTyCd6CsrERVsTNnR3ekIyicgKA2',drugs,drugs,drugs);
   };
 
-  function writePrescription(userId, drug_name,dosage,instructions) {
-    const db = getDatabase();
-    set(ref(db, 'users/' + userId), {
-      drug: drug_name,
-      amount: dosage,
-      directions: instructions,
-    });
-    console.log("Prescription uploaded");
-  }
 
   return (
     <View style={styles.container}>
@@ -163,3 +163,4 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
+
