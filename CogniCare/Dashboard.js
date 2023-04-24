@@ -7,20 +7,17 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
-import { CheckBox } from 'react-native-elements';
-import {auth} from "./Firebase/firebase";
+import { auth } from "./Firebase/firebase";
 import { onValue } from "firebase/database";
 import { useEffect } from "react";
 import Icon from "react-native-vector-icons/FontAwesome";
-
-
 
 import { getDatabase, ref, child, get } from "firebase/database";
 
 function useUserData(userId) {
   const [userData, setUserData] = useState(null);
   const db = getDatabase();
-  const userRef = ref(db, 'users/' + userId);
+  const userRef = ref(db, "users/" + userId);
 
   useEffect(() => {
     onValue(userRef, (snapshot) => {
@@ -33,7 +30,7 @@ function useUserData(userId) {
 }
 
 const Dashboard = ({ navigation }) => {
-  const userData = useUserData('JTyCd6CsrERVsTNnR3ekIyicgKA2');
+  const userData = useUserData("JTyCd6CsrERVsTNnR3ekIyicgKA2");
 
   if (userData) {
     //var drug_1 = userData.drugs[0];
@@ -45,19 +42,15 @@ const Dashboard = ({ navigation }) => {
     var drug_2 = "drug 2";
     var drug_3 = "drug 3";
     var drug_4 = "drug 4";
-
   }
-  console.log(drug_1)
+  console.log(drug_1);
 
   const pills = [
-    { time: "08:00 AM", name: drug_1},
-    { time: "10:00 AM", name: drug_2},
-    { time: "12:00 PM", name: drug_3},
-    { time: "03:00 PM", name: drug_4},
+    { time: "08:00 AM", name: drug_1 },
+    { time: "10:00 AM", name: drug_2 },
+    { time: "12:00 PM", name: drug_3 },
+    { time: "03:00 PM", name: drug_4 },
   ];
-
-
-  
 
   const [checkedPills, setCheckedPills] = useState([]);
 
@@ -132,10 +125,10 @@ const Dashboard = ({ navigation }) => {
         </View>
       </ScrollView>
     </View>
-  )};
+  );
+};
 
 export default Dashboard;
-
 
 const styles = StyleSheet.create({
   container: {

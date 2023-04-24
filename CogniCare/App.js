@@ -12,6 +12,7 @@ import PrescriptionScreen from "./Prescription";
 import { useState } from "react";
 import { useEffect } from "react";
 import Dashboard from "./Dashboard";
+import DiagnosisScreen from "./Diagnosis";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -21,6 +22,7 @@ function LoginStack() {
     <Stack.Navigator>
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Onboarding" component={OnboardingScreen} />
+      <Stack.Screen name="Diagnosis" component={DiagnosisScreen} />
       <Stack.Screen name="Prescription" component={PrescriptionScreen} />
       <Stack.Screen name="Dashboard" component={DashboardTabs} />
     </Stack.Navigator>
