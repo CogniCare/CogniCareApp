@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, Text, TextInput, Button, StyleSheet } from "react-native";
 import { getDatabase, ref, set } from "firebase/database";
 import { auth } from "./Firebase/firebase";
+import Diagnosis from "./Diagnosis"; // import Diagnosis component
 
 const user = auth.currentUser;
 
@@ -12,7 +13,6 @@ const Onboarding = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [diagnosis, setDiagnosis] = useState("");
-  
 
   function writeUserData(userId, name, email, date, num, condiation) {
     const db = getDatabase();
@@ -27,12 +27,17 @@ const Onboarding = ({ navigation }) => {
 
   const handleOnboarding = () => {
     // Handle onboarding logic here
-    navigation.navigate("Prescription");
-   
-    writeUserData(
-      '4CYYwVo2rZdDdYHYC66gMrnBQmI2',fullName,email,dob,phoneNumber,diagnosis)
-    console.log('compleated Onboarding:');
+    navigation.navigate("Diagnosis");
 
+    writeUserData(
+      "4CYYwVo2rZdDdYHYC66gMrnBQmI2",
+      fullName,
+      email,
+      dob,
+      phoneNumber,
+      diagnosis
+    );
+    console.log("Complete Onboarding:");
   };
 
   return (
@@ -68,13 +73,7 @@ const Onboarding = ({ navigation }) => {
         value={gender}
         onChangeText={setGender}
       />
-      <TextInput
-        style={styles.input}
-        placeholder="Diagnosis"
-        value={diagnosis}
-        onChangeText={setDiagnosis}
-      />
-      <Button title="Input Prescription" onPress={handleOnboarding} />
+      <Button title="Input Diagnosis" onPress={handleOnboarding} />
     </View>
   );
 };
