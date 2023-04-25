@@ -32,6 +32,7 @@ export default function Prescription({ navigation }) {
     newDrugs.splice(index, 1);
     setDrugs(newDrugs);
   };
+  
 
   const handleSavePrescription = () => {
     const db = getDatabase();
@@ -55,7 +56,7 @@ export default function Prescription({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Prescription Page</Text>
+      <Text style={styles.title}>What did Doc prescribe you with?</Text>
       <View style={styles.form}>
         <TextInput
           style={styles.input}
@@ -65,7 +66,7 @@ export default function Prescription({ navigation }) {
         />
         <TextInput
           style={styles.input}
-          placeholder="Prescription"
+          placeholder="Dosage"
           value={prescription}
           onChangeText={setPrescription}
         />

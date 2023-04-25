@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import { getDatabase, ref, set } from "firebase/database";
 import {auth} from "./Firebase/firebase";
+import { Picker } from '@react-native-picker/picker';
+
 
 
 export default function Diagnosis({ navigation }) {
   const [diagnostics, setDiagnostics] = useState([]);
   const [newDiagnostic, setNewDiagnostic] = useState('');
+  const [selectedDiagnostic, setSelectedDiagnostic] = useState('');
+  
 
   const handleAddDiagnostic = () => {
-    setDiagnostics([...diagnostics, newDiagnostic]);
-    setNewDiagnostic('');
+    setDiagnostics([...diagnostics, selectedDiagnostic]);
+    setSelectedDiagnostic('');
   };
 
   const handleDeleteDiagnostic = (index) => {
@@ -40,14 +44,19 @@ export default function Diagnosis({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Diagnostic Page</Text>
+      <Text style={styles.title}>What are you diagnosed with?</Text>
       <View style={styles.form}>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter diagnostic name"
-          value={newDiagnostic}
-          onChangeText={setNewDiagnostic}
-        />
+        <Picker
+          selectedValue={selectedDiagnostic}
+          onValueChange={(itemValue) => setSelectedDiagnostic(itemValue)}
+        >
+          <Picker.Item label="Alzhimers" value="Alzhimers" />
+          <Picker.Item label="Type 2 Diabetes" value="Type 2 Diabetes" />
+          <Picker.Item label="Coronary Artery Disease" value="Coronary Artery Disease" />
+          <Picker.Item label="Cogestive Heart Failure" value="Cogestive Heart Failure" />
+
+          {/* Add more diagnosis options as needed */}
+        </Picker>
         <TouchableOpacity style={styles.addButton} onPress={handleAddDiagnostic}>
           <Text style={styles.addButtonText}>Add Diagnostic</Text>
         </TouchableOpacity>

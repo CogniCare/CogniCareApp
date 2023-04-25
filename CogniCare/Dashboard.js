@@ -14,25 +14,38 @@ import Icon from "react-native-vector-icons/FontAwesome";
 
 import { getDatabase, ref, child, get } from "firebase/database";
 
-function useUserData(userId) {
-  const [userData, setUserData] = useState(null);
-  const db = getDatabase();
-  const userRef = ref(db, "users/" + userId);
+const db = getDatabase();
+const userId = 'JTyCd6CsrERVsTNnR3ekIyicgKA2'; // Replace with your user ID
+let drugs = []; // Declare the drugs array in a higher scope
 
-  useEffect(() => {
-    onValue(userRef, (snapshot) => {
-      const data = snapshot.val();
-      setUserData(data);
-    });
-  }, [userId]);
+// Create a reference to the drugs location in the database for the current user
+const drugsRef = ref(db, `users/${userId}/drugs`);
 
-  return userData;
-}
+// Listen for changes to the drugs data and update the drugs array
+onValue(drugsRef, (snapshot) => {
+  drugs = []; // Clear the drugs array before updating it
+  snapshot.forEach((childSnapshot) => {
+    const drug = childSnapshot.val();
+    drugs.push(drug);
+  });
+});
+
+// Create a reference to the diagnostics location in the database for the current user
+const diagnosticsRef = ref(db, `users/${userId}/diagnostics`);
+
+// Listen for changes to the diagnostics data and log the data to the console
+onValue(diagnosticsRef, (snapshot) => {
+  diagnostics = []; // Create an empty array to store the diagnostics data
+  snapshot.forEach((childSnapshot) => {
+    const diagnostic = childSnapshot.val();
+    diagnostics.push(diagnostic);
+  });
+});
+
 
 const Dashboard = ({ navigation }) => {
-  const userData = useUserData("JTyCd6CsrERVsTNnR3ekIyicgKA2");
 
-  if (userData) {
+  if (true) {
     //var drug_1 = userData.drugs[0];
     //var drug_2 = userData.drugs[1];
     //var drug_3 = userData.drugs[2];
@@ -43,11 +56,14 @@ const Dashboard = ({ navigation }) => {
     var drug_3 = "drug 3";
     var drug_4 = "drug 4";
   }
-  console.log(drug_1);
+  console.log("Initial drugs data:", drugs[0].name);
+  console.log("Diagnostics data:", diagnostics[0].name);
+
+
 
   const pills = [
-    { time: "08:00 AM", name: drug_1 },
-    { time: "10:00 AM", name: drug_2 },
+    { time: "08:00 AM", name: drugs[0].name},
+    { time: "10:00 AM", name: drugs[1].name},
     { time: "12:00 PM", name: drug_3 },
     { time: "03:00 PM", name: drug_4 },
   ];

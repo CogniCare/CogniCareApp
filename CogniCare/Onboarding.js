@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, Button, StyleSheet } from "react-native";
+import { View, Text, TextInput, Button,TouchableOpacity, StyleSheet } from "react-native";
 import { getDatabase, ref, set } from "firebase/database";
 import { auth } from "./Firebase/firebase";
 import Diagnosis from "./Diagnosis"; // import Diagnosis component
@@ -42,7 +42,7 @@ const Onboarding = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>CogniCare Onboarding</Text>
+      <Text style={styles.title}>Tell Us About You!</Text>
       <TextInput
         style={styles.input}
         placeholder="Full Name"
@@ -73,7 +73,10 @@ const Onboarding = ({ navigation }) => {
         value={gender}
         onChangeText={setGender}
       />
-      <Button title="Input Diagnosis" onPress={handleOnboarding} />
+      <TouchableOpacity style={styles.saveButton} onPress={handleOnboarding}>
+      <Text style={styles.saveButtonText}>Input Diagnosis</Text>
+      </TouchableOpacity>
+      
     </View>
   );
 };
@@ -84,9 +87,21 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  
   title: {
-    fontSize: 32,
-    marginBottom: 32,
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 20,
+  },
+  saveButton:{
+    backgroundColor: '#0782F9',
+    padding: 10,
+    alignItems: 'center',
+    marginTop: 200,
+  },
+  saveButtonText: {
+    color: '#fff',
+    fontWeight: 'bold',
   },
   input: {
     borderWidth: 1,
