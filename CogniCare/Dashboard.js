@@ -11,7 +11,6 @@ import { auth } from "./Firebase/firebase";
 import { onValue } from "firebase/database";
 import { useEffect } from "react";
 import Icon from "react-native-vector-icons/FontAwesome";
-
 import { getDatabase, ref, child, get } from "firebase/database";
 
 const db = getDatabase();
@@ -41,6 +40,12 @@ onValue(diagnosticsRef, (snapshot) => {
     diagnostics.push(diagnostic);
   });
 });
+
+const handleDispensePill = () => {
+  // Logic to dispense pills
+  //handleCheck(pills.name);
+  
+};
 
 
 const Dashboard = ({ navigation }) => {
@@ -139,6 +144,9 @@ const Dashboard = ({ navigation }) => {
             </View>
           ))}
         </View>
+      <TouchableOpacity style={styles.button} onPress={handleDispensePill}>
+        <Text style={styles.buttonText}>Dispense Pill</Text>
+      </TouchableOpacity>
       </ScrollView>
     </View>
   );
@@ -202,5 +210,16 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     fontSize: 16,
     flex: 1,
+  },
+  button: {
+    backgroundColor: "#33CC66",
+    borderRadius: 10,
+    padding: 10,
+    marginTop: 20,
+    alignItems: "center",
+  },
+  buttonText: {
+    color: "white",
+    fontSize: 18,
   },
 });
