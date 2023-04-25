@@ -32,7 +32,6 @@ export default function Prescription({ navigation }) {
     newDrugs.splice(index, 1);
     setDrugs(newDrugs);
   };
-  
 
   const handleSavePrescription = () => {
     const db = getDatabase();
