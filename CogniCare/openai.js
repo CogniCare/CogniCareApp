@@ -14,12 +14,12 @@ const openai = new OpenAIApi(configuration);
 
 app.get("/medication-plan", async (req, res) => {
   const prescription =
-    "Aricept 5mg, once a day; Asprin 325mg every 4-6 hours; ibuprofen 200mg, every 5 hours";
+    "Aricept 5mg, once a day; Metaformin 500mg 2 times a day; Glutarol 5mg once a day";
   const diagnosis =
-    "mild Alzheimer's and Mild to moderate pain in the lower back";
+    " Alzheimer's and Type 2 Diabetes";
   const prompt = `You are HealthGPT. Patient prescription: ${prescription}
   Patient diagnosis: ${diagnosis}
-  Generate a medication plan with no drug contradictions for the week (Monday-Friday). For each day, Indicate drug name, what time to take, dosage, and instructions. Out the plan in a JSON format like the following for each day of the week: {
+  Generate a medication plan with no drug contradictions for the week (Monday-Friday). For each day, Indicate drug name, specific military time to take, dosage, and instructions. Out the plan in a JSON format like the following for each day of the week: {
   "day": [
     {
       "drugName": "",
