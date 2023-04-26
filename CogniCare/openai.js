@@ -35,8 +35,7 @@ app.get("/medication-plan", async (req, res) => {
 
   const medicationPlan = completion.data.choices[0].message.content;
 
-  console.log(medicationPlan);
-  //res.send(`<pre>${medicationPlan}</pre>`);
+res.send(medicationPlan) ; //res.send(`<pre>${medicationPlan}</pre>`);
 });
 
 app.get("/", (req, res) => {

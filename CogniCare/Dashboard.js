@@ -65,8 +65,7 @@ const Dashboard = ({ navigation }) => {
   const pills = [
     { time: "08:00 AM", name: drugs[0].name},
     { time: "10:00 AM", name: drugs[1].name},
-    { time: "12:00 PM", name: drug_3 },
-    { time: "03:00 PM", name: drug_4 },
+    { time: "12:00 PM", name: drugs[2].name},
   ];
 
   const [checkedPills, setCheckedPills] = useState([]);
