@@ -18,16 +18,13 @@ const firebaseConfig = {
   storageBucket: "cognicaredb.appspot.com",
   messagingSenderId: "381161245730",
   appId: "1:381161245730:web:c1ddc4a6f97baf26bfce7b",
-  measurementId: "G-YHRPLY6KYZ"
+  measurementId: "G-YHRPLY6KYZ",
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
-
-
 const auth = getAuth(app);
 
-
-export {auth};
+export { auth };
