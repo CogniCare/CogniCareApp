@@ -14,15 +14,18 @@ const Onboarding = ({ navigation }) => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [diagnosis, setDiagnosis] = useState("");
 
-  function writeUserData(userId, name, email, date, num, condiation) {
+  function writeUserData(userId, name, email, date, num, sex) {
     const db = getDatabase();
-    set(ref(db, "users/" + userId), {
+    set(ref(db, "users/" + userId + "/onboarding"), {
       fullname: name,
       email: email,
       bday: date,
       phoneNum: num,
-      disease: condiation,
+      Gender: sex,
     });
+    
+    //  const drugRef = ref(db, `users/${userId}/drugs/${drugId}`);
+    
   }
 
   const handleOnboarding = () => {
@@ -30,15 +33,19 @@ const Onboarding = ({ navigation }) => {
     navigation.navigate("Diagnosis");
 
     writeUserData(
-      "4CYYwVo2rZdDdYHYC66gMrnBQmI2",
+      "JTyCd6CsrERVsTNnR3ekIyicgKA2",
       fullName,
       email,
       dob,
       phoneNumber,
-      diagnosis
+      gender,
     );
     console.log("Complete Onboarding:");
+
+    
   };
+
+  
 
   return (
     <View style={styles.container}>
