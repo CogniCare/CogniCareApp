@@ -82,17 +82,21 @@ const Dashboard = ({ navigation }) => {
   const [selectedDate, setSelectedDate] = useState("");
 
   const handleDispensePill = () => {
-    checkedPills.forEach((pillName) => {
-      setCheckedPills((prevState) => {
-        const newState = prevState.map((pill) => {
-          if (pill.name === pillName) {
-            return { ...pill, dispensed: true };
-          }
-          return pill;
-        });
-        return newState;
-      });
-    });
+    fetch('http://192.168.4.1/dispense', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    // Insert your request data here
+  })
+})
+.then(response => {
+  // Handle the response from the server
+})
+.catch(error => {
+  // Handle any errors that occur during the request
+});
   };
 
   const handleDayPress = (day) => {
