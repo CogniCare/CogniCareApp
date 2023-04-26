@@ -12,9 +12,9 @@ const Onboarding = ({ navigation }) => {
   const [gender, setGender] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [diagnosis, setDiagnosis] = useState("");
+  const [cairPhoneNumber, setCairPhoneNumber] = useState("");
 
-  function writeUserData(userId, name, email, date, num, sex) {
+  function writeUserData(userId, name, email, date, num, sex,cairNum) {
     const db = getDatabase();
     set(ref(db, "users/" + userId + "/onboarding"), {
       fullname: name,
@@ -22,10 +22,9 @@ const Onboarding = ({ navigation }) => {
       bday: date,
       phoneNum: num,
       Gender: sex,
+      caireGiverContact: cairNum,
     });
-    
-    //  const drugRef = ref(db, `users/${userId}/drugs/${drugId}`);
-    
+        
   }
 
   const handleOnboarding = () => {
@@ -39,6 +38,7 @@ const Onboarding = ({ navigation }) => {
       dob,
       phoneNumber,
       gender,
+      cairPhoneNumber
     );
     console.log("Complete Onboarding:");
 
@@ -79,6 +79,12 @@ const Onboarding = ({ navigation }) => {
         placeholder="Gender"
         value={gender}
         onChangeText={setGender}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Care Giver Number:"
+        value={cairPhoneNumber}
+        onChangeText={setCairPhoneNumber}
       />
       <TouchableOpacity style={styles.saveButton} onPress={handleOnboarding}>
       <Text style={styles.saveButtonText}>Input Diagnosis</Text>

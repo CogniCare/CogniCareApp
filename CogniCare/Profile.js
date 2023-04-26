@@ -14,6 +14,8 @@ const Profile = () => {
   const [prescription, setPrescription] = useState("");
   const [doctorName, setDoctorName] = useState("");
   const [clinicInfo, setClinicInfo] = useState("");
+  const [CairePhone, setCairePhone] = useState("");
+
   // Get a reference to the database
   const db = getDatabase();
 
@@ -40,6 +42,7 @@ useEffect(() => {
     setPrescription(onboarding[2] || "");
     setDoctorName(onboarding[4] || "");
     setClinicInfo(onboarding[0] || "");
+    setCairePhone(onboarding[5] || "");
   });
 }, []);
 
@@ -76,7 +79,14 @@ useEffect(() => {
         value={clinicInfo}
         onChangeText={(text) => setClinicInfo(text)}
       />
+      <Text style={styles.label}>Care Giver Contact:</Text>
+      <TextInput
+        style={styles.input}
+        value={CairePhone}
+        onChangeText={(text) => setCairePhone(text)}
+      />
     </View>
+    
   );
 };
 
