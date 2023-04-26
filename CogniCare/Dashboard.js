@@ -57,15 +57,15 @@ const Dashboard = ({ navigation }) => {
     var drug_3 = "drug 3";
     var drug_4 = "drug 4";
   }
-  console.log("Initial drugs data:", drugs[0].name);
-  console.log("Diagnostics data:", diagnostics[0].name);
+  //console.log("Initial drugs data:", drugs[0].name);
+  //console.log("Diagnostics data:", diagnostics[0].name);
 
 
 
   const pills = [
-    { time: "08:00 AM", name: drugs[0].name},
-    { time: "10:00 AM", name: drugs[1].name},
-    { time: "12:00 PM", name: drugs[2].name},
+    { time: "08:00 AM", name: (drugs[0].name + "  " + drugs[0].prescription)},
+    { time: "10:00 AM", name: (drugs[1].name + "  " + drugs[1].prescription)},
+    { time: "12:00 PM", name: (drugs[2].name + "  " + drugs[2].prescription)},
   ];
 
   const [checkedPills, setCheckedPills] = useState([]);
