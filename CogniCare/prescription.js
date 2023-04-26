@@ -9,6 +9,7 @@ import {
 import { getDatabase, ref, set } from "firebase/database";
 import { auth } from "./Firebase/firebase";
 
+
 export default function Prescription({ navigation }) {
   const [drugs, setDrugs] = useState([]);
   const [name, setName] = useState("");

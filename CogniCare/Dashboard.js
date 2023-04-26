@@ -41,11 +41,7 @@ onValue(diagnosticsRef, (snapshot) => {
   });
 });
 
-const handleDispensePill = () => {
-  // Logic to dispense pills
-  //handleCheck(pills.name);
-  
-};
+
 
 
 const Dashboard = ({ navigation }) => {
@@ -84,6 +80,20 @@ const Dashboard = ({ navigation }) => {
   };
 
   const [selectedDate, setSelectedDate] = useState("");
+
+  const handleDispensePill = () => {
+    checkedPills.forEach((pillName) => {
+      setCheckedPills((prevState) => {
+        const newState = prevState.map((pill) => {
+          if (pill.name === pillName) {
+            return { ...pill, dispensed: true };
+          }
+          return pill;
+        });
+        return newState;
+      });
+    });
+  };
 
   const handleDayPress = (day) => {
     setSelectedDate(day.dateString);
@@ -144,9 +154,9 @@ const Dashboard = ({ navigation }) => {
             </View>
           ))}
         </View>
-      <TouchableOpacity style={styles.button} onPress={handleDispensePill}>
+        <TouchableOpacity style={styles.button} onPress={handleDispensePill}>
         <Text style={styles.buttonText}>Dispense Pill</Text>
-      </TouchableOpacity>
+        </TouchableOpacity>
       </ScrollView>
     </View>
   );
