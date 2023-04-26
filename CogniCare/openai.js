@@ -13,28 +13,20 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 app.get("/medication-plan", async (req, res) => {
-  //app.post("/medication-plan/:userId", async (req, res) => {
-  //const { userId } = req.params;
-  //const { drugs } = req.body;
-
-  //const db = getDatabase();
-  //for (const drug of drugs) {
-  // set(ref(db, `users/${userId}/${drug.name}`), {
-  //  amount: drug.dosage,
-  //     directions: drug.instructions,
-  //   });
-  // }
-  // console.log("Prescriptions uploaded");
-
-  // const prescriptionList = drugs.map(drug => `${drug.name} ${drug.dosage}, ${drug.instructions}`).join("; ");
-
   const prescription =
     "Aricept 5mg, once a day; Asprin 325mg every 4-6 hours; ibuprofen 200mg, every 5 hours";
   const diagnosis =
     "mild Alzheimer's and Mild to moderate pain in the lower back";
   const prompt = `You are HealthGPT. Patient prescription: ${prescription}
   Patient diagnosis: ${diagnosis}
-  Generate a medication plan with no drug contradictions for the week (Monday-Friday). For each day, Indicate drug name, what time to take, dosage, and instructions. Only output a week plan in tabular format.`;
+  Generate a medication plan with no drug contradictions for the week (Monday-Friday). For each day, Indicate drug name, what time to take, dosage, and instructions. Out the plan in a JSON format like the following for each day of the week: {
+  "day": [
+    {
+      "drugName": "",
+      "time": "",
+      "dosage": "",
+      "instructions": ""
+  ],`;
 
   const completion = await openai.createChatCompletion({
     model: "gpt-3.5-turbo",
@@ -44,7 +36,7 @@ app.get("/medication-plan", async (req, res) => {
   const medicationPlan = completion.data.choices[0].message.content;
 
   console.log(medicationPlan);
-  res.send(`<pre>${medicationPlan}</pre>`);
+  //res.send(`<pre>${medicationPlan}</pre>`);
 });
 
 app.get("/", (req, res) => {
@@ -54,3 +46,18 @@ app.get("/", (req, res) => {
 app.listen(port, () => {
   console.log(`API server running at http://localhost:${port}`);
 });
+
+//app.post("/medication-plan/:userId", async (req, res) => {
+//const { userId } = req.params;
+//const { drugs } = req.body;
+
+//const db = getDatabase();
+//for (const drug of drugs) {
+// set(ref(db, `users/${userId}/${drug.name}`), {
+//  amount: drug.dosage,
+//     directions: drug.instructions,
+//   });
+// }
+// console.log("Prescriptions uploaded");
+
+// const prescriptionList = drugs.map(drug => `${drug.name} ${drug.dosage}, ${drug.instructions}`).join("; ");
